@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ComposeDemo">
         <activity
-            android:name=".MainActivity"
+            android:name=".activity.ComposeMainActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.ComposeDemo.NoActionBar">
@@ -20,6 +20,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".activity.ComposeWidgetActivity"
+            android:exported="true" />
+
+        <activity
+            android:name=".activity.ComposeCustomizeActivity"
+            android:exported="true" />
     </application>
 
 </manifest>
