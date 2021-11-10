@@ -1,10 +1,15 @@
 package com.example.composedemo.view
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.layout.*
+import androidx.compose.material.Divider
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.*
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -74,4 +79,59 @@ fun ShowCustomizeColumn(
         }
     }
 
+}
+
+/**
+ *  自定义一个支持固有特性测量的横向列表
+ */
+@Composable
+fun ShowCustomizeIntrinsicRow(
+    modifier: Modifier,
+    content: @Composable () -> Unit
+) {
+    Layout(
+        content = content,
+        modifier = modifier,
+        measurePolicy = object : MeasurePolicy {
+            override fun MeasureScope.measure(
+                measurables: List<Measurable>,
+                constraints: Constraints
+            ): MeasureResult {
+                // 将分界线最小宽度置为0
+                val divideConstraints = constraints.copy(minWidth = 0)
+                // 获取文字的placeable
+                val mainPlaceables = measurables.filter {
+                    it.layoutId == "main"
+                }.map {
+                    it.measure(constraints)
+                }
+                // 获取分界线的placeable
+                val dividePlaceable = measurables.first {
+                    it.layoutId == "divider"
+                }.measure(divideConstraints)
+                // 获取宽度中间值
+                val midPos = constraints.maxWidth / 2
+                //布局
+                return layout(constraints.maxWidth, constraints.maxHeight) {
+                    // 文字控件的宽度和父控件相同
+                    mainPlaceables.forEach { placeable ->
+                        placeable.placeRelative(0, 0)
+                    }
+
+                    dividePlaceable.placeRelative(midPos, 0)
+                }
+            }
+
+            override fun IntrinsicMeasureScope.minIntrinsicHeight(
+                measurables: List<IntrinsicMeasurable>,
+                width: Int
+            ): Int {
+                // 遍历所有子元素的固有特性最小高度,找到其中最大的, 设置为父控件的高度
+                var maxHeight = 0
+                measurables.forEach { intrinsicMeasurable ->
+                    maxHeight = intrinsicMeasurable.minIntrinsicHeight(width).coerceAtLeast(maxHeight)
+                }
+                return maxHeight
+            }
+        })
 }
