@@ -1,9 +1,6 @@
 package com.example.composedemo.activity
 
 import android.content.res.Configuration
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.Image
@@ -24,26 +21,20 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.composedemo.Message
 import com.example.composedemo.R
-import com.example.composedemo.utils.ResourceUtil
 import com.example.composedemo.WidgetType
+import com.example.composedemo.base.BaseActivity
 import com.example.composedemo.ui.theme.ComposeDemoTheme
+import com.example.composedemo.utils.ResourceUtil
 import com.example.composedemo.view.*
 
 /**
  *  Compose组件页面
  */
 @ExperimentalMaterialApi
-class ComposeWidgetActivity : ComponentActivity() {
+class ComposeWidgetActivity : BaseActivity() {
 
     companion object {
         private const val TAG = "ComposeWidgetActivity"
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            PreviewMessageCard()
-        }
     }
 
     /**
@@ -57,7 +48,7 @@ class ComposeWidgetActivity : ComponentActivity() {
         showBackground = true,
     )
     @Composable
-    fun PreviewMessageCard() {
+    override fun ShowPreview() {
         ComposeDemoTheme {
             WidgetList()
         }

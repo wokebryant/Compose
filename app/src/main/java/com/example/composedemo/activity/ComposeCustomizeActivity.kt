@@ -1,9 +1,6 @@
 package com.example.composedemo.activity
 
 import android.annotation.SuppressLint
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Divider
 import androidx.compose.material.ExperimentalMaterialApi
@@ -15,25 +12,19 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.composedemo.view.ShowCustomizeColumn
+import com.example.composedemo.base.BaseActivity
 import com.example.composedemo.view.ShowCustomizeIntrinsicRow
-import com.example.composedemo.view.ShowCustomizeText
 
 /**
  *  Compose自定义页面
  */
 @ExperimentalMaterialApi
 @SuppressLint("CoroutineCreationDuringComposition")
-class ComposeCustomizeActivity : ComponentActivity() {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent { ShowPreview() }
-    }
+class ComposeCustomizeActivity : BaseActivity() {
 
     @Preview(showBackground = true)
     @Composable
-    private fun ShowPreview() {
+    override fun ShowPreview() {
         //通过Modifier自定义padding, 类似自定义View
 //        ShowCustomizeText(text = "Hi there!")
 //        Text(text = "Hi three!", modifier = Modifier.padding(top = 24.dp))

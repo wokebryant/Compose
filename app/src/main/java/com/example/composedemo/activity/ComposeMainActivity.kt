@@ -1,8 +1,5 @@
 package com.example.composedemo.activity
 
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
@@ -17,24 +14,19 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.composedemo.COMPOSE_WELCOME
+import com.example.composedemo.R
+import com.example.composedemo.base.BaseActivity
 import com.example.composedemo.utils.AppUtil
 
 /**
  *  Compose主页面
  */
 @ExperimentalMaterialApi
-class ComposeMainActivity : ComponentActivity() {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            ShowPreview()
-        }
-    }
+class ComposeMainActivity : BaseActivity() {
 
     @Preview
     @Composable
-    private fun ShowPreview() {
+    override fun ShowPreview() {
         Column (
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center,
@@ -51,51 +43,53 @@ class ComposeMainActivity : ComponentActivity() {
                 ),
             )
 
-            Spacer(modifier = Modifier.size(20.dp))
+            PageItem(backgroundColor = Color.Magenta, content = resources.getString(R.string.compose_widget))
+            PageItem(backgroundColor = Color.Blue, content = resources.getString(R.string.compose_customize_view))
+            PageItem(backgroundColor = Color.Cyan, content = resources.getString(R.string.compose_animation))
+            PageItem(backgroundColor = Color.Red, content = resources.getString(R.string.compose_list))
+            PageItem(backgroundColor = Color.Green, content = resources.getString(R.string.compose_graphics))
+        }
+    }
 
-            TextButton(
-                onClick = {
-                    AppUtil.startActivity<ComposeWidgetActivity>(this@ComposeMainActivity) {}
-                },
-                colors = ButtonDefaults.buttonColors(
-                    backgroundColor = Color.Magenta,
-                    contentColor = Color.White
-                ),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(50.dp)
-                    .clip(shape = CircleShape)
-            ) {
-                Text(
-                    text = "Compose组件",
-                    style = TextStyle(
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 15.sp
-                    ))
-            }
+    @Composable
+    private fun PageItem(backgroundColor: Color, content: String) {
+        Spacer(modifier = Modifier.size(20.dp))
 
-            Spacer(modifier = Modifier.size(20.dp))
+        TextButton(
+            onClick = {
+                when (content) {
+                    resources.getString(R.string.compose_widget) ->
+                        AppUtil.startActivity<ComposeWidgetActivity>(this@ComposeMainActivity) {}
 
-            TextButton(
-                onClick = {
+                    resources.getString(R.string.compose_customize_view) ->
                         AppUtil.startActivity<ComposeCustomizeActivity>(this@ComposeMainActivity) {}
-                },
-                colors = ButtonDefaults.buttonColors(
-                    backgroundColor = Color.Blue,
-                    contentColor = Color.White
-                ),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(50.dp)
-                    .clip(shape = CircleShape)
-            ) {
-                Text(
-                    text = "Compose自定义View",
-                    style = TextStyle(
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 15.sp
-                    ))
-            }
+
+                    resources.getString(R.string.compose_animation) ->
+                        AppUtil.startActivity<ComposeAnimationActivity>(this@ComposeMainActivity) {}
+
+                    resources.getString(R.string.compose_list) ->
+                        AppUtil.startActivity<ComposeListActivity>(this@ComposeMainActivity) {}
+
+                    resources.getString(R.string.compose_graphics) ->
+                        AppUtil.startActivity<ComposeGraphicsActivity>(this@ComposeMainActivity) {}
+                }
+            },
+            colors = ButtonDefaults.buttonColors(
+                backgroundColor = backgroundColor,
+                contentColor = Color.White
+            ),
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(50.dp)
+                .clip(shape = CircleShape)
+        ) {
+            Text(
+                text = content,
+                style = TextStyle(
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 15.sp
+                )
+            )
         }
     }
 
