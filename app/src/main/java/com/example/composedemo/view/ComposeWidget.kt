@@ -40,6 +40,7 @@ import androidx.compose.ui.window.Dialog
 import com.example.composedemo.ButtonState
 import com.example.composedemo.Message
 import com.example.composedemo.R
+import com.example.composedemo.WidgetType
 import com.example.composedemo.ui.theme.Shapes
 import kotlinx.coroutines.launch
 
@@ -72,6 +73,7 @@ fun ShowAlterDialog(confirmClick: () -> Unit, dismissCLick: () -> Unit)  {
                         confirmClick()
                         openDialog.value = false
                     }
+
                 ) {
                     Text(text = "是的")
                 }
@@ -787,30 +789,33 @@ fun ShowTopAppBar() {
  *  列表
  */
 @Composable
+@ExperimentalMaterialApi
 fun ShowRecyclerView(messages: List<Message>, activity: ComponentActivity) {
     activity.setContent {
         LazyColumn {
             items(messages) { message ->
-                RecyclerViewItem(message)
+                RecyclerViewItem(message) {}
             }
         }
     }
 }
 
 @Composable
-private fun RecyclerViewItem(message: Message) {
+@ExperimentalMaterialApi
+fun RecyclerViewItem(message: Message, onItemClick: (WidgetType) -> Unit) {
     Card(
         modifier = Modifier
             .padding(8.dp)
             .fillMaxWidth(),
         elevation = 8.dp,
-        shape = Shapes.small
+        shape = Shapes.small,
+        onClick = { onItemClick(message.type) }
     ) {
         Column(
             modifier = Modifier.padding(8.dp),
-            horizontalAlignment = Alignment.Start
+            horizontalAlignment = Alignment.Start,
         ) {
-            Text(text = message.author, color = Color.DarkGray)
+            Text(text = message.title, color = Color.DarkGray)
             Spacer(modifier = Modifier.size(10.dp))
             Text(text = message.body, color = Color.Blue, fontWeight = FontWeight.ExtraBold)
         }

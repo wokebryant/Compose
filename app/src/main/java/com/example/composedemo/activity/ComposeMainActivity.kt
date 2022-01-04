@@ -1,5 +1,6 @@
 package com.example.composedemo.activity
 
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
@@ -22,6 +23,7 @@ import com.example.composedemo.utils.AppUtil
  *  Compose主页面
  */
 @ExperimentalMaterialApi
+@ExperimentalAnimationApi
 class ComposeMainActivity : BaseActivity() {
 
     @Preview

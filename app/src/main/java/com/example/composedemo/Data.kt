@@ -25,14 +25,25 @@ enum class WidgetType {
     SPACER,
     SCAFFOLD,
     TOP_APP_BAR,
-    RECYCLERVIEW
+    RECYCLERVIEW,
+
+    ANIM_FADE,
+    ANIM_VISIBILITY,
+    ANIM_STATE,
+    ANIM_TABLE,
+    ANIM_TRANSITION
+}
+
+enum class AnimType {
+
 }
 
 data class Message(
-    val author: String,
+    val title: String,
     val body: String = "",
     val type: WidgetType = WidgetType.NONE
 )
+
 
 data class ButtonState(
     var text: String,
