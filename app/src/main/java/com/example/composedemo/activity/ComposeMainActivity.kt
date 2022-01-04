@@ -17,6 +17,7 @@ import androidx.compose.ui.unit.sp
 import com.example.composedemo.COMPOSE_WELCOME
 import com.example.composedemo.R
 import com.example.composedemo.base.BaseActivity
+import com.example.composedemo.share.ComposeShareActivity
 import com.example.composedemo.utils.AppUtil
 
 /**
@@ -50,6 +51,7 @@ class ComposeMainActivity : BaseActivity() {
             PageItem(backgroundColor = Color.Cyan, content = resources.getString(R.string.compose_animation))
             PageItem(backgroundColor = Color.Red, content = resources.getString(R.string.compose_list))
             PageItem(backgroundColor = Color.Green, content = resources.getString(R.string.compose_graphics))
+            PageItem(backgroundColor = Color.Black, content = resources.getString(R.string.compose_share))
         }
     }
 
@@ -74,6 +76,9 @@ class ComposeMainActivity : BaseActivity() {
 
                     resources.getString(R.string.compose_graphics) ->
                         AppUtil.startActivity<ComposeGraphicsActivity>(this@ComposeMainActivity) {}
+
+                    resources.getString(R.string.compose_share) ->
+                        AppUtil.startActivity<ComposeShareActivity>(this@ComposeMainActivity) {}
                 }
             },
             colors = ButtonDefaults.buttonColors(
