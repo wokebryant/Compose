@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">ComposeDemo</string>
+
+    <string name="compose_widget">Compose组件</string>
+    <string name="compose_customize_view">Compose自定义View</string>
+    <string name="compose_animation">Compose动画</string>
+    <string name="compose_gestures">Compose手势</string>
+    <string name="compose_list">Compose列表</string>
+    <string name="compose_graphics">Compose绘制</string>
+    <string name="compose_share">Compose分享</string>
+
 </resources>

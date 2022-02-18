@@ -28,6 +28,11 @@
         <activity
             android:name=".activity.ComposeCustomizeActivity"
             android:exported="true" />
+
+        <activity android:name=".activity.ComposeAnimationActivity"/>
+        <activity android:name=".activity.ComposeListActivity"/>
+        <activity android:name=".activity.ComposeGraphicsActivity"/>
+        <activity android:name=".share.ComposeShareActivity"/>
     </application>
 
 </manifest>
