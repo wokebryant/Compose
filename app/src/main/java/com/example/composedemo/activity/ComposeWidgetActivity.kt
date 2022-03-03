@@ -92,6 +92,8 @@ class ComposeWidgetActivity : BaseActivity() {
             MessageCard(Message("Spacer", type = WidgetType.SPACER))
             MessageCard(Message("Scaffold", type = WidgetType.SCAFFOLD))
             MessageCard(Message("TopAppBar", type = WidgetType.TOP_APP_BAR))
+            MessageCard(Message("FoldToolBar", type = WidgetType.GESTURE_FOLD_TOOLBAR))
+            MessageCard(Message("PullRefreshLayout", type = WidgetType.GESTURE_PULL_REFRESH))
         }
     }
 
@@ -207,6 +209,11 @@ class ComposeWidgetActivity : BaseActivity() {
             WidgetType.TOP_APP_BAR -> { ShowTopAppBar() }
 
             WidgetType.RECYCLERVIEW -> { ShowRecyclerView(ResourceUtil.getMessageList(), this)}
+
+            WidgetType.GESTURE_FOLD_TOOLBAR -> { ShowFoldToolBar(this) }
+
+            WidgetType.GESTURE_PULL_REFRESH -> { ShowPullRefreshLayout(this) }
+
             else -> {}
         }
     }

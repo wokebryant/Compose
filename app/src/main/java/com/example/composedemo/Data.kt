@@ -31,7 +31,10 @@ enum class WidgetType {
     ANIM_VISIBILITY,
     ANIM_STATE,
     ANIM_TABLE,
-    ANIM_TRANSITION
+    ANIM_TRANSITION,
+
+    GESTURE_FOLD_TOOLBAR,
+    GESTURE_PULL_REFRESH,
 }
 
 enum class AnimType {

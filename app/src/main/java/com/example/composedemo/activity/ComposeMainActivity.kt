@@ -48,9 +48,10 @@ class ComposeMainActivity : BaseActivity() {
 
             PageItem(backgroundColor = Color.Magenta, content = resources.getString(R.string.compose_widget))
             PageItem(backgroundColor = Color.Blue, content = resources.getString(R.string.compose_customize_view))
-            PageItem(backgroundColor = Color.Cyan, content = resources.getString(R.string.compose_animation))
             PageItem(backgroundColor = Color.Red, content = resources.getString(R.string.compose_list))
             PageItem(backgroundColor = Color.Green, content = resources.getString(R.string.compose_graphics))
+            PageItem(backgroundColor = Color.Gray, content = resources.getString(R.string.compose_animation))
+            PageItem(backgroundColor = Color.DarkGray, content = resources.getString(R.string.compose_gestures))
             PageItem(backgroundColor = Color.Black, content = resources.getString(R.string.compose_share))
         }
     }
@@ -74,11 +75,14 @@ class ComposeMainActivity : BaseActivity() {
                     resources.getString(R.string.compose_list) ->
                         AppUtil.startActivity<ComposeListActivity>(this@ComposeMainActivity) {}
 
-                    resources.getString(R.string.compose_graphics) ->
-                        AppUtil.startActivity<ComposeGraphicsActivity>(this@ComposeMainActivity) {}
+                    resources.getString(R.string.compose_gestures) ->
+                        AppUtil.startActivity<ComposeGestureActivity>(this@ComposeMainActivity) {}
 
                     resources.getString(R.string.compose_share) ->
                         AppUtil.startActivity<ComposeShareActivity>(this@ComposeMainActivity) {}
+
+                    resources.getString(R.string.compose_graphics) ->
+                        AppUtil.startActivity<ComposeGraphicsActivity>(this@ComposeMainActivity) {}
                 }
             },
             colors = ButtonDefaults.buttonColors(

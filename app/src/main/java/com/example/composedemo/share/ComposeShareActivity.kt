@@ -25,6 +25,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.composedemo.R
+import com.example.composedemo.base.BaseActivity
 import com.example.composedemo.ui.theme.Shapes
 import com.example.composedemo.view.ShowAlterDialog
 import kotlin.math.exp
@@ -35,14 +36,13 @@ import kotlin.math.exp
  * @Description: Compose分享
  */
 @ExperimentalAnimationApi
-class ComposeShareActivity : ComponentActivity() {
+class ComposeShareActivity : BaseActivity() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-//            Text(text = "Hello World!")
-            PreviewMessageCard()
-        }
+    @Preview
+    @Composable
+    override fun ShowPreview() {
+//        Text(text = "Hello World!")
+        PreviewMessageCard()
     }
 
     @Composable

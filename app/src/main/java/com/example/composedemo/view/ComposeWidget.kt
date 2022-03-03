@@ -24,8 +24,13 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
+import androidx.compose.ui.input.nestedscroll.NestedScrollSource
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
@@ -42,6 +47,7 @@ import com.example.composedemo.Message
 import com.example.composedemo.R
 import com.example.composedemo.WidgetType
 import com.example.composedemo.ui.theme.Shapes
+import com.example.composedemo.view.widget.ScrollableAppBar
 import kotlinx.coroutines.launch
 
 /**
@@ -818,6 +824,67 @@ fun RecyclerViewItem(message: Message, onItemClick: (WidgetType) -> Unit) {
             Text(text = message.title, color = Color.DarkGray)
             Spacer(modifier = Modifier.size(10.dp))
             Text(text = message.body, color = Color.Blue, fontWeight = FontWeight.ExtraBold)
+        }
+    }
+}
+
+/**
+ *  折叠ToolBar
+ */
+@Composable
+fun ShowFoldToolBar(activity: ComponentActivity) {
+    activity.setContent {
+
+    }
+}
+
+/**
+ * 下拉刷新
+ */
+@Composable
+fun ShowPullRefreshLayout(activity: ComponentActivity) {
+    activity.setContent {
+        val toolbarHeight = 200.dp
+        val maxUpPx = with(LocalDensity.current) {
+            // 56.dp为 androidx.compose.material AppBar.kt 里面定义的 private val AppBarHeight = 56.dp
+            toolbarHeight.roundToPx().toFloat() - 56.dp.roundToPx().toFloat()
+        }
+        val minUpPx = 0f
+        val toolbarOffsetHeightPx = remember {
+            mutableStateOf(0f)
+        }
+
+        val nestedScrollConnection = remember {
+            object : NestedScrollConnection {
+                override fun onPreScroll(available: Offset, source: NestedScrollSource): Offset {
+                    val delta = available.y
+                    val newOffset = toolbarOffsetHeightPx.value + delta
+                    toolbarOffsetHeightPx.value = newOffset.coerceIn(- maxUpPx, - minUpPx)
+                    return super.onPreScroll(available, source)
+                }
+            }
+        }
+
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .nestedScroll(nestedScrollConnection)
+        ) {
+            LazyColumn {
+                items(100) { index ->
+                    Text(
+                        text = "This is item $index",
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(16.dp)
+                    )
+                }
+            }
+            ScrollableAppBar(
+                backgroundImageId = R.drawable.ic_kukong,
+                scrollableAppBarHeight = toolbarHeight,
+                toolbarOffsetHeightPx = toolbarOffsetHeightPx
+            )
         }
     }
 }
