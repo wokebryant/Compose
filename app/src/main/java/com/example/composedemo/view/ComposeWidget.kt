@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.setContent
+import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -48,6 +49,8 @@ import com.example.composedemo.R
 import com.example.composedemo.WidgetType
 import com.example.composedemo.ui.theme.Shapes
 import com.example.composedemo.view.widget.ScrollableAppBar
+import com.example.composedemo.view.widget.SmartSwipeRefresh
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 /**
@@ -834,16 +837,6 @@ fun RecyclerViewItem(message: Message, onItemClick: (WidgetType) -> Unit) {
 @Composable
 fun ShowFoldToolBar(activity: ComponentActivity) {
     activity.setContent {
-
-    }
-}
-
-/**
- * 下拉刷新
- */
-@Composable
-fun ShowPullRefreshLayout(activity: ComponentActivity) {
-    activity.setContent {
         val toolbarHeight = 200.dp
         val maxUpPx = with(LocalDensity.current) {
             // 56.dp为 androidx.compose.material AppBar.kt 里面定义的 private val AppBarHeight = 56.dp
@@ -885,6 +878,66 @@ fun ShowPullRefreshLayout(activity: ComponentActivity) {
                 scrollableAppBarHeight = toolbarHeight,
                 toolbarOffsetHeightPx = toolbarOffsetHeightPx
             )
+        }
+    }
+}
+
+/**
+ * 下拉刷新
+ */
+@Composable
+fun ShowPullRefreshLayout(activity: ComponentActivity) {
+    activity.setContent {
+        val sentences = remember {
+            mutableStateListOf(
+                "这是刷新前的页面 1",
+                "这是刷新前的页面 2",
+                "这是刷新前的页面 3",
+                "这是刷新前的页面 4",
+                "这是刷新前的页面 5",
+            )
+        }
+
+        Box(modifier = Modifier.fillMaxSize()) {
+            SmartSwipeRefresh(
+                onRefresh = {
+                    delay(2000)
+                    if (sentences.size == 5) {
+                        sentences.add(0, "这是刷新后的页面 1")
+                        sentences.add(0, "这是刷新后的页面 2")
+                        sentences.add(0, "这是刷新后的页面 3")
+                    }
+                },
+                loadingIndicator = {
+                    Box(modifier = Modifier.padding(10.dp)) {
+                        CircularProgressIndicator(Modifier.size(40.dp))
+                    }
+                }
+            ) {
+                LazyColumn(modifier = Modifier.fillMaxSize()) {
+                    items(sentences.size) { index ->
+                        val currentSentence = sentences[index]
+                        Card(modifier = Modifier
+                            .fillMaxWidth()
+                            .height(200.dp)
+                            .padding(16.dp),
+                            elevation = 4.dp
+                        ) {
+                            Box(
+                                modifier = Modifier
+                                    .fillMaxSize()
+                                    .padding(16.dp),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                Text(
+                                    text = currentSentence,
+                                    fontSize = 24.sp
+                                )
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }

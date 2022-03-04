@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.core.view.WindowCompat
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 /**
@@ -29,6 +30,7 @@ abstract class BaseActivity : ComponentActivity() {
 
     @Composable
     fun SetStatusBar() {
+//        WindowCompat.setDecorFitsSystemWindows(window, false)
         rememberSystemUiController().setStatusBarColor(
             color = Color.Transparent,
             darkIcons = true
