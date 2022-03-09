@@ -1,6 +1,7 @@
 package com.example.composedemo.activity
 
 import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
@@ -18,6 +19,8 @@ import com.example.composedemo.COMPOSE_WELCOME
 import com.example.composedemo.R
 import com.example.composedemo.base.BaseActivity
 import com.example.composedemo.share.ComposeShareActivity
+import com.example.composedemo.ui.theme.Purple200
+import com.example.composedemo.ui.theme.Teal200
 import com.example.composedemo.utils.AppUtil
 
 /**
@@ -25,6 +28,7 @@ import com.example.composedemo.utils.AppUtil
  */
 @ExperimentalMaterialApi
 @ExperimentalAnimationApi
+@ExperimentalFoundationApi
 class ComposeMainActivity : BaseActivity() {
 
     @Preview
@@ -49,10 +53,11 @@ class ComposeMainActivity : BaseActivity() {
             PageItem(backgroundColor = Color.Magenta, content = resources.getString(R.string.compose_widget))
             PageItem(backgroundColor = Color.Blue, content = resources.getString(R.string.compose_customize_view))
             PageItem(backgroundColor = Color.Red, content = resources.getString(R.string.compose_list))
-            PageItem(backgroundColor = Color.Green, content = resources.getString(R.string.compose_graphics))
+            PageItem(backgroundColor = Purple200, content = resources.getString(R.string.compose_graphics))
             PageItem(backgroundColor = Color.Gray, content = resources.getString(R.string.compose_animation))
             PageItem(backgroundColor = Color.DarkGray, content = resources.getString(R.string.compose_gestures))
             PageItem(backgroundColor = Color.Black, content = resources.getString(R.string.compose_share))
+            PageItem(backgroundColor = Teal200, content = resources.getString(R.string.compose_practice))
         }
     }
 
@@ -83,6 +88,9 @@ class ComposeMainActivity : BaseActivity() {
 
                     resources.getString(R.string.compose_graphics) ->
                         AppUtil.startActivity<ComposeGraphicsActivity>(this@ComposeMainActivity) {}
+
+                    resources.getString(R.string.compose_practice) ->
+                        AppUtil.startActivity<ComposePracticeActivity>(this) {}
                 }
             },
             colors = ButtonDefaults.buttonColors(

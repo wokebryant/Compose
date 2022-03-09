@@ -8,5 +8,6 @@
     <string name="compose_list">Compose列表</string>
     <string name="compose_graphics">Compose绘制</string>
     <string name="compose_share">Compose分享</string>
+    <string name="compose_practice">Compose练习</string>
 
 </resources>

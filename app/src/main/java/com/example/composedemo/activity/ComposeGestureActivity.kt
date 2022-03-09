@@ -15,6 +15,7 @@ import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.PointerInputChange
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.tooling.preview.Preview
@@ -53,6 +54,7 @@ class ComposeGestureActivity : BaseActivity() {
             Spacer(modifier = Modifier.height(10.dp))
             DoubleFingerTransform()
             Spacer(modifier = Modifier.height(10.dp))
+            CustomGestureDrag()
         }
     }
 
@@ -265,6 +267,51 @@ class ComposeGestureActivity : BaseActivity() {
     @Composable
     private fun NestedScroll() {
 
+    }
+
+    /**
+     *  自定义手势
+     *  PointerInput修饰符
+     *  如draggable, swishable, transform这些手势API都是基于PointerInput封装
+     *  直接使用PointerInput修饰符可以拓展更多能力
+     */
+    @Composable
+    private fun CustomGestureDrag() {
+        val boxSize = 100.dp
+        var offset by remember {
+            mutableStateOf(Offset.Zero)
+        }
+
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+        ) {
+            Box(
+                modifier = Modifier
+                    .size(boxSize)
+                    .offset {
+                        IntOffset(offset.x.roundToInt(), offset.y.roundToInt())
+                    }
+                    .background(Color.Blue)
+                    .pointerInput(Unit) {
+                        detectDragGestures(
+                            onDragStart = {
+                                // 拖动开始
+                            },
+                            onDragEnd = {
+                                // 拖动结束
+                            },
+                            onDragCancel = {
+                                // 拖动取消
+                            },
+                            onDrag = { change: PointerInputChange, dragAmount: Offset ->
+                                // 拖动时
+                                offset += dragAmount
+                            }
+                        )
+                    }
+            )
+        }
     }
 
 }

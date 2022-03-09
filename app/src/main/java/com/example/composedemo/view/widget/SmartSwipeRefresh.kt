@@ -63,12 +63,15 @@ private class SmartSwipeRefreshNestedScrollConnection(
         // 1. 手势首先被父布局处理:
         //    (1)上滑:  父布局处理, 进度条出现, 滑动被父布局消费掉(即进度条和RecycleView的滑动事件失效,子布局offset由updateOffsetDelta()方法控制,
         //                        进度条不出现, 则不消费，由子布局处理(即RecycleView滑动事件生效)
-        if (source == NestedScrollSource.Drag && available.y < 0) {
-            state.updateOffsetDelta(available.y)
-
-            return if (state.isSwipeInProgress) Offset(x = 0f, y = available.y) else Offset.Zero
+        return if (source == NestedScrollSource.Drag && available.y < 0) {
+            if (state.isSwipeInProgress) {
+                state.updateOffsetDelta(available.y)
+                Offset(x = 0f, y = available.y)
+            } else {
+                Offset.Zero
+            }
         } else {
-            return Offset.Zero  // 这里代表, 父布局不处理, 事件交由子布局处理
+            Offset.Zero  // 这里代表, 父布局不处理, 事件交由子布局处理
         }
     }
 
@@ -77,8 +80,9 @@ private class SmartSwipeRefreshNestedScrollConnection(
         available: Offset,
         source: NestedScrollSource
     ): Offset {
-        //          当子布局滑动处理完毕(即RecycleView滑到顶部了), onPostScroll()方法才被回调,滑动交由父布局控制
-        //          (即RecycleView滑动事件失效,offset由updateOffsetDelta()方法控制)
+        // 2. 子布局处理完自身滑动然后交由父布局处理:
+        //    (2)下滑     当子布局滑动处理完毕(即RecycleView滑到顶部了), onPostScroll()方法才被回调,滑动交由父布局控制
+        //               (即RecycleView滑动事件失效,offset由updateOffsetDelta()方法控制)
         return if (source == NestedScrollSource.Drag && available.y > 0) {
             state.updateOffsetDelta(available.y)
             Offset(x = 0f, y = available.y) // 将剩下的所有偏移量全部消费调，不再向外层父布局继续传播了

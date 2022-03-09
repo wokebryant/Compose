@@ -13,10 +13,8 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Camera
 import androidx.compose.material.icons.filled.Search
-import androidx.compose.material.icons.outlined.Star
 import androidx.compose.material.icons.rounded.Favorite
 import androidx.compose.material.icons.rounded.StarBorder
-import androidx.compose.material.icons.sharp.Star
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -261,7 +259,7 @@ class ComposeAnimationActivity : BaseActivity() {
                 }
         ) {
             Image(
-                painter = painterResource(id = R.drawable.ic_kukong),
+                painter = painterResource(id = R.drawable.img_kukong),
                 contentDescription = null,
                 contentScale = ContentScale.FillBounds
             )

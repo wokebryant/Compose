@@ -1,8 +1,5 @@
 package com.example.composedemo.share
 
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.Image
@@ -17,18 +14,13 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.example.composedemo.R
 import com.example.composedemo.base.BaseActivity
-import com.example.composedemo.ui.theme.Shapes
-import com.example.composedemo.view.ShowAlterDialog
-import kotlin.math.exp
 
 /**
  * @Author: LuoJia
@@ -42,7 +34,8 @@ class ComposeShareActivity : BaseActivity() {
     @Composable
     override fun ShowPreview() {
 //        Text(text = "Hello World!")
-        PreviewMessageCard()
+//        PreviewMessageCard()
+        JetpackCompose()
     }
 
     @Composable
@@ -87,7 +80,7 @@ class ComposeShareActivity : BaseActivity() {
                 ) {
                     Spacer(modifier = Modifier.size(50.dp))
                     Image(
-                        painter = painterResource(id = R.drawable.ic_kukong),
+                        painter = painterResource(id = R.drawable.img_kukong),
                         modifier = Modifier.size(200.dp),
                         contentDescription = ""
                     )

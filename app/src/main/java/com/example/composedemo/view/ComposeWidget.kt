@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.setContent
-import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -280,7 +279,7 @@ fun ShowIcon() {
 fun ShowImage() {
     Row {
         Image(
-            painter = painterResource(id = R.drawable.header),
+            painter = painterResource(id = R.drawable.img_river),
             contentDescription = null,
             contentScale = ContentScale.Crop,
             modifier = Modifier
@@ -290,7 +289,7 @@ fun ShowImage() {
         )
 
         Image(
-            painter = painterResource(id = R.drawable.header),
+            painter = painterResource(id = R.drawable.img_river),
             contentDescription = null,
             contentScale = ContentScale.Crop,
             modifier = Modifier
@@ -301,7 +300,7 @@ fun ShowImage() {
         )
 
         Image(
-            painter = painterResource(id = R.drawable.header),
+            painter = painterResource(id = R.drawable.img_river),
             contentDescription = null,
             contentScale = ContentScale.Crop,
             modifier = Modifier
@@ -874,7 +873,7 @@ fun ShowFoldToolBar(activity: ComponentActivity) {
                 }
             }
             ScrollableAppBar(
-                backgroundImageId = R.drawable.ic_kukong,
+                backgroundImageId = R.drawable.img_kukong,
                 scrollableAppBarHeight = toolbarHeight,
                 toolbarOffsetHeightPx = toolbarOffsetHeightPx
             )

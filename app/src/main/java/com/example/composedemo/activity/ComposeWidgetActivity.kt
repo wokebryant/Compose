@@ -1,13 +1,13 @@
 package com.example.composedemo.activity
 
 import android.content.res.Configuration
-import android.os.Bundle
-import androidx.activity.compose.setContent
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.animateContentSize
-import androidx.compose.foundation.*
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
@@ -15,7 +15,6 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -130,7 +129,7 @@ class ComposeWidgetActivity : BaseActivity() {
             ) {
                 /** 显示图片 **/
                 Image(
-                    painter = painterResource(id = R.drawable.ic_kukong),
+                    painter = painterResource(id = R.drawable.img_kukong),
                     contentDescription = "profile picture",  //这个描述无障碍
                     modifier = Modifier
                         .size(40.dp),
