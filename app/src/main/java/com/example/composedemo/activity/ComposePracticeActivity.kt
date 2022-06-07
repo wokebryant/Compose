@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.GridCells
 import androidx.compose.foundation.lazy.LazyVerticalGrid
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -21,12 +22,14 @@ import androidx.compose.ui.unit.dp
 import com.example.composedemo.base.BaseActivity
 import com.example.composedemo.ui.theme.Purple200
 import com.example.composedemo.view.ShareAnimationView
+import com.example.composedemo.view.ShowBottomSheetScaffold
 
 /**
  * @Author: LuoJia
  * @Date: 2022-03-09
  * @Description: Compose实战练习
  */
+@ExperimentalMaterialApi
 @ExperimentalFoundationApi
 class ComposePracticeActivity : BaseActivity() {
 
@@ -42,7 +45,7 @@ class ComposePracticeActivity : BaseActivity() {
 
     private val practiceObjectList = listOf(
         PracticeModel("🔥共享元素动画", PracticeType.ShareAnimation),
-        PracticeModel("🔥待定", PracticeType.TODO),
+        PracticeModel("🔥BottomSheet脚手架", PracticeType.BottomSheetScaffold),
         PracticeModel("🔥待定", PracticeType.TODO),
         PracticeModel("🔥待定", PracticeType.TODO),
         PracticeModel("🔥待定", PracticeType.TODO),
@@ -59,6 +62,7 @@ class ComposePracticeActivity : BaseActivity() {
 
     sealed class PracticeType {
         object ShareAnimation : PracticeType()
+        object BottomSheetScaffold : PracticeType()
         object TODO : PracticeType()
     }
 
@@ -66,6 +70,9 @@ class ComposePracticeActivity : BaseActivity() {
         when (type) {
             PracticeType.ShareAnimation -> {
                 setContent { ShareAnimationView() }
+            }
+            PracticeType.BottomSheetScaffold -> {
+                setContent { ShowBottomSheetScaffold() }
             }
             PracticeType.TODO -> {
                 Toast.makeText(this, "敬请期待", Toast.LENGTH_SHORT).show()
