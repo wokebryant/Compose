@@ -6,6 +6,9 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.*
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material.ButtonColors
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Text
@@ -98,7 +101,7 @@ class ComposeListActivity : BaseActivity() {
             // 定义一列最小宽度
 //            cells = GridCells.Adaptive(minSize = 128.dp)
             // 定义列数
-            cells = GridCells.Fixed(3)
+            columns = GridCells.Fixed(3)
         ) {
             items(imageList) {
                 Image(

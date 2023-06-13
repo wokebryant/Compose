@@ -436,11 +436,11 @@ fun LoveDetailsPage(
                 )
             }
             Surface(
-                { onPageClosing() },
-                Modifier.padding(14.dp, 32.dp),
+//                { onPageClosing() },
+                modifier = Modifier.padding(14.dp, 32.dp),
                 color = Color.White,
                 shape = CircleShape,
-                indication = rememberRipple()
+//                indication = rememberRipple()
             ) {
                 Icon(
                     painterResource(R.drawable.ic_back),
@@ -460,13 +460,12 @@ fun LoveDetailsPage(
                 fontWeight = FontWeight.Bold
             )
             Surface(
-                { },
-                Modifier
+                modifier = Modifier
                     .align(Alignment.TopEnd)
                     .padding(14.dp, 32.dp),
                 color = Color.White,
                 shape = CircleShape,
-                indication = rememberRipple()
+//                indication = rememberRipple()
             ) {
                 Icon(
                     painterResource(R.drawable.ic_more),
